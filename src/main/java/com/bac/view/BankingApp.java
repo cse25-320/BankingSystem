@@ -10,8 +10,8 @@ public class BankingApp extends Application {
 
     @Override
     public void start(Stage stage) {
-        OpenAccountView view = new OpenAccountView();
-        stage.setScene(new Scene(view, 520, 520));
+        AccountView view = new AccountView();
+        stage.setScene(new Scene(view, 640, 640));
         stage.setTitle("Bank Gaborone");
         stage.show();
     }
