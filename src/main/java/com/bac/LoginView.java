@@ -22,18 +22,21 @@ public class LoginView extends VBox {
         setSpacing(12);
         setPadding(new Insets(40));
         setAlignment(Pos.CENTER);
+        setStyle("-fx-background-color: linear-gradient(to bottom right, #1e3c72, #2a5298);");
 
         Label title = new Label("Bank Gaborone");
-        title.setStyle("-fx-font-size: 22px; -fx-font-weight: bold;");
+        title.setStyle("-fx-font-size: 24px; -fx-font-weight: bold;-fx-text-fill: white;");
         Label subtitle = new Label("Please enter your login credentials to continue");
+        subtitle.setStyle("-fx-text-fill: #d6e4ff;");
 
         usernameField.setPromptText("Username");
         passwordField.setPromptText("Password");
 
         loginButton.setMaxWidth(Double.MAX_VALUE);
-        loginButton.setDefaultButton(true); // pressing Enter clicks Login
+        loginButton.setDefaultButton(true);
+        loginButton.setStyle("-fx-background-color:#f5b400;-fx-text-fill:#1a1a1a;"+"-fx-font-weight:bold;-fx-background-radius:6;");
 
-        messageLabel.setStyle("-fx-text-fill: #c0392b;"); // red text for errors
+        messageLabel.setStyle("-fx-text-fill: #ffb4a9;");
 
         getChildren().addAll(title, subtitle, usernameField, passwordField, loginButton, messageLabel);
     }
