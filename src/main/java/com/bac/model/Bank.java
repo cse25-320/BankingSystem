@@ -36,6 +36,17 @@ public class Bank {
         return Optional.empty();
     }
 
+    public Optional<Account> findAccount(String accountNumber) {
+        for (Customer customer : customers) {
+            for (Account account : customer.getAccounts()) {
+                if (account.getAccountNumber().equals(accountNumber)) {
+                    return Optional.of(account);
+                }
+            }
+        }
+        return Optional.empty();
+    }
+
     public List<Customer> getCustomers() {
         return Collections.unmodifiableList(customers);
     }

@@ -1,5 +1,8 @@
 package com.bac.controller;
 
+import com.bac.view.AccountView;
+import com.bac.view.OpenAccountView;
+import com.bac.view.RegisterCustomerView;
 import com.bac.model.Bank;
 import com.bac.view.LoginView;
 import com.bac.view.MainMenuView;
@@ -30,6 +33,23 @@ public class Navigator {
         show(view, 420, 480, "Main Menu");
     }
 
+    public void showRegisterCustomer() {
+        RegisterCustomerView view = new RegisterCustomerView();
+        new RegisterCustomerController(view, this, bank);
+        show(view, 480, 420, "Register Customer");
+    }
+
+    public void showOpenAccount() {
+        OpenAccountView view = new OpenAccountView();
+        new OpenAccountController(view, this, bank);
+        show(view, 540, 540, "Open Account");
+    }
+
+    public void showAccountView() {
+        AccountView view = new AccountView();
+        new AccountController(view, this, bank);
+        show(view, 680, 680, "Accounts & Transactions");
+    }
     private void show(Parent root, double width, double height, String title) {
         stage.setScene(new Scene(root, width, height));
         stage.setTitle(bank.getName() + " - " + title);

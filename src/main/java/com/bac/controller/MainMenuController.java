@@ -18,7 +18,9 @@ public class MainMenuController {
         view.setWelcomeText("Welcome, Teller");
         view.setOnPayInterestAction(event -> handlePayInterest());
         view.setOnLogoutAction(event -> navigator.showLogin());
-        // The other three buttons are connected in the next slices
+        view.setOnRegisterCustomerAction(event -> navigator.showRegisterCustomer());
+        view.setOnOpenAccountAction(event -> navigator.showOpenAccount());
+        view.setOnViewAccountsAction(event -> navigator.showAccountView());
     }
 
     private void handlePayInterest() {
