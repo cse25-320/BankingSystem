@@ -1,18 +1,16 @@
 package com.bac.view;
 
+import com.bac.controller.Navigator;
+import com.bac.model.Bank;
 import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class BankingApp extends Application {
 
     @Override
     public void start(Stage stage) {
-        AccountView view = new AccountView();
-        stage.setScene(new Scene(view, 640, 640));
-        stage.setTitle("Bank Gaborone");
-        stage.show();
+        Bank bank = new Bank("Bank Gaborone", "Gaborone Main");
+        Navigator navigator = new Navigator(stage, bank);
+        navigator.showLogin();
     }
 }

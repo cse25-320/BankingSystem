@@ -1,5 +1,6 @@
 package com.bac.view;
 
+import javafx.scene.control.Alert;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -53,6 +54,11 @@ public class MainMenuView extends VBox {
         welcomeLabel.setText(text);
     }
 
+    public void showInfo(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, message);
+        alert.setHeaderText(null);
+        alert.showAndWait();
+    }
     public void setOnRegisterCustomerAction(EventHandler<ActionEvent> handler) {
         registerCustomerButton.setOnAction(handler);
     }
