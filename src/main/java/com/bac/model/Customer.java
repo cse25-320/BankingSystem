@@ -22,19 +22,19 @@ public class Customer {
         setAddress(address);
     }
 
-    // OVERLOADED constructor: address can be added later
+    // OVERLOADED constructor
     public Customer(String firstName, String surname) {
         this(firstName, surname, "Not provided");
     }
 
-    // Package-private: only an Account registers itself with its owner
+    // Package-private
     void addAccount(Account account) {
         if (!accounts.contains(account)) {
             accounts.add(account);
         }
     }
 
-    // Read-only view, so outside code can't change the list (encapsulation)
+    // Read-only view
     public List<Account> getAccounts() {
         return Collections.unmodifiableList(accounts);
     }

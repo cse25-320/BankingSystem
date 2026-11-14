@@ -69,7 +69,6 @@ public class Bank {
 
     // monthly interesr
 
-    // Loops over plain Account objects. Only those that implement InterestBearing get paid.
     public int payMonthlyInterest() throws BankingException {
         int paid = 0;
         for (Customer customer : customers) {

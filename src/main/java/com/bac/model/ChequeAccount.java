@@ -40,7 +40,7 @@ public class ChequeAccount extends Account {
     public String getEmployerName() { return employerName; }
     public String getEmployerAddress() { return employerAddress; }
 
-    // OVERRIDING toString and adding the employer details to the parent's version
+    // adding the employer details to the parent's version
     @Override
     public String toString() {
         return super.toString() + " employer=" + employerName + " (" + employerAddress + ")";
