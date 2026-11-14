@@ -5,7 +5,7 @@ import com.bac.exception.BankingException;
 public interface InterestBearing {
 
     //Monthly interest rate as a percentage
-    double getMonthlyInterest();
+    double getMonthlyInterestRate();
 
     //Works out current month's interest
     double calculateMonthlyInterest();
