@@ -1,6 +1,5 @@
 package com.bac;
 
-import com.bac.view.BankingApp;
 import javafx.application.Application;
 
 public class AppLauncher {

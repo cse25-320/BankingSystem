@@ -1,4 +1,4 @@
-package com.bac.view;
+package com.bac;
 
 import com.bac.controller.Navigator;
 import com.bac.model.Bank;
