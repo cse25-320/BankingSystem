@@ -2,6 +2,8 @@ package com.bac.model;
 
 import com.bac.exception.BankingException;
 import com.bac.exception.WithdrawalNotAllowedException;
+import java.time.LocalDate;
+import java.util.List;
 
 // INHERITANCE: SavingsAccount IS-A Account
 // INTERFACE: it also implements InterestBearing
@@ -16,6 +18,12 @@ public class SavingsAccount extends Account implements InterestBearing {
     // OVERLOADED constructor: open with no initial deposit
     public SavingsAccount(Customer owner, String branch) throws BankingException {
         this(owner, branch, 0);
+    }
+
+    // Used when loading from the database
+    public SavingsAccount(String accountNumber, Customer owner, String branch,
+                          LocalDate dateOpened, double balance, List<Transaction> history) {
+        super(accountNumber, owner, branch, dateOpened, balance, history);
     }
 
     // OVERRIDING: savings accounts never allow withdrawals

@@ -47,6 +47,25 @@ public abstract class Account {
         owner.addAccount(this);
     }
 
+    // Used when loading a saved account from the database
+    protected Account(String accountNumber, Customer owner, String branch,
+                      LocalDate dateOpened, double balance, List<Transaction> history) {
+        this.accountNumber = accountNumber;
+        this.owner = owner;
+        this.branch = branch;
+        this.dateOpened = dateOpened;
+        this.balance = balance;
+        this.transactions.addAll(history);
+
+        // Keep the account counter ahead of loaded numbers
+        int number = Integer.parseInt(accountNumber.substring(3));
+        if (number >= accountCounter) {
+            accountCounter = number + 1;
+        }
+
+        owner.addAccount(this);
+    }
+
     // OVERLOAD
     public void deposit(double amount) throws BankingException {
         deposit(amount, "Cash deposit");

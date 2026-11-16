@@ -27,6 +27,19 @@ public class Customer {
         this(firstName, surname, "Not provided");
     }
 
+    // Used when loading a saved customer from the database
+    public Customer(String customerId, String firstName, String surname, String address) {
+        this.customerId = customerId;
+        setFirstName(firstName);
+        setSurname(surname);
+        setAddress(address);
+
+        // Keep the ID counter ahead of loaded IDs, so new customers never reuse one
+        int number = Integer.parseInt(customerId.substring(4)); // "CUST1001" -> 1001
+        if (number >= idCounter) {
+            idCounter = number + 1;
+        }
+    }
     // Package-private
     void addAccount(Account account) {
         if (!accounts.contains(account)) {

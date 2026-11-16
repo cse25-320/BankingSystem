@@ -17,6 +17,15 @@ public class Transaction {
         this.timestamp = LocalDateTime.now();
     }
 
+    // Used when loading a saved transaction from the database
+    public Transaction(TransactionType type, double amount, double balanceAfter,
+                       String description, LocalDateTime timestamp) {
+        this.type = type;
+        this.amount = amount;
+        this.balanceAfter = balanceAfter;
+        this.description = description;
+        this.timestamp = timestamp;
+    }
     public TransactionType getType() {
         return type;
     }

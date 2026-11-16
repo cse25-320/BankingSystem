@@ -3,6 +3,9 @@ package com.bac.model;
 import com.bac.exception.AccountOpeningException;
 import com.bac.exception.BankingException;
 
+import java.time.LocalDate;
+import java.util.List;
+
 public class InvestmentAccount extends Account implements InterestBearing {
 
     public static final double MONTHLY_INTEREST_RATE = 5.0; // percent
@@ -11,6 +14,12 @@ public class InvestmentAccount extends Account implements InterestBearing {
     public InvestmentAccount(Customer owner, String branch, double openingDeposit) throws BankingException {
         // The check runs BEFORE the parent constructor, so a bad account is never created
         super(owner, branch, requireMinimumDeposit(openingDeposit));
+    }
+
+    // Used when loading from the database
+    public InvestmentAccount(String accountNumber, Customer owner, String branch,
+                             LocalDate dateOpened, double balance, List<Transaction> history) {
+        super(accountNumber, owner, branch, dateOpened, balance, history);
     }
 
     private static double requireMinimumDeposit(double openingDeposit) throws AccountOpeningException {

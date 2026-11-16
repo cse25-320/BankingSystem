@@ -2,6 +2,8 @@ package com.bac.model;
 
 import com.bac.exception.AccountOpeningException;
 import com.bac.exception.BankingException;
+import java.time.LocalDate;
+import java.util.List;
 
 public class ChequeAccount extends Account {
 
@@ -14,6 +16,15 @@ public class ChequeAccount extends Account {
         super(owner, branch, requireEmployment(openingDeposit, employerName, employerAddress));
         this.employerName = employerName.trim();
         this.employerAddress = employerAddress.trim();
+    }
+
+    // Used when loading from the database
+    public ChequeAccount(String accountNumber, Customer owner, String branch,
+                         LocalDate dateOpened, double balance, List<Transaction> history,
+                         String employerName, String employerAddress) {
+        super(accountNumber, owner, branch, dateOpened, balance, history);
+        this.employerName = employerName;
+        this.employerAddress = employerAddress;
     }
 
     private static double requireEmployment(double openingDeposit, String employerName,
