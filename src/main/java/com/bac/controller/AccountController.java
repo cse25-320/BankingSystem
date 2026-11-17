@@ -1,11 +1,13 @@
 package com.bac.controller;
 
+import com.bac.dao.AccountDAO;
 import com.bac.exception.BankingException;
 import com.bac.model.Account;
 import com.bac.model.Bank;
 import com.bac.model.Transaction;
 import com.bac.view.AccountView;
 
+import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +19,7 @@ public class AccountController {
 
     private final AccountView view;
     private final Bank bank;
+    private final AccountDAO accountDAO = new AccountDAO();
     private Account currentAccount; // the account currently on screen
 
     public AccountController(AccountView view, Navigator navigator, Bank bank) {
@@ -56,11 +59,14 @@ public class AccountController {
         }
         try {
             currentAccount.deposit(amount);
+            accountDAO.saveChanges(currentAccount); // save to the database
             view.showSuccess("Deposit successful");
             view.clearAmount();
             refreshScreen();
         } catch (BankingException e) {
             view.showError(e.getMessage());
+        } catch (SQLException e) {
+            view.showError("Could not save to the database: " + e.getMessage());
         }
     }
 
@@ -71,12 +77,15 @@ public class AccountController {
         }
         try {
             currentAccount.withdraw(amount);
+            accountDAO.saveChanges(currentAccount); // save to the database
             view.showSuccess("Withdrawal successful");
             view.clearAmount();
             refreshScreen();
         } catch (BankingException e) {
             // e.g. Savings accounts refuse, or not enough money
             view.showError(e.getMessage());
+        } catch (SQLException e) {
+            view.showError("Could not save to the database: " + e.getMessage());
         }
     }
 

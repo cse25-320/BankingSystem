@@ -1,17 +1,20 @@
 package com.bac.controller;
 
+import com.bac.dao.AccountDAO;
 import com.bac.exception.BankingException;
 import com.bac.model.Account;
 import com.bac.model.Bank;
 import com.bac.model.Customer;
 import com.bac.view.OpenAccountView;
 
+import java.sql.SQLException;
 import java.util.Optional;
 
 public class OpenAccountController {
 
     private final OpenAccountView view;
     private final Bank bank;
+    private final AccountDAO accountDAO = new AccountDAO();
 
     public OpenAccountController(OpenAccountView view, Navigator navigator, Bank bank) {
         this.view = view;
@@ -65,11 +68,14 @@ public class OpenAccountController {
                     return;
                 }
             }
+            accountDAO.insert(account); // save to the database
             view.showSuccess(accountType + " account opened. Account number: " + account.getAccountNumber());
             view.clearFields();
         } catch (BankingException e) {
             // The model's rules (minimum deposit, employer required...) produce these messages
             view.showError(e.getMessage());
+        } catch (SQLException e) {
+            view.showError("Could not save to the database: " + e.getMessage());
         }
     }
 }
