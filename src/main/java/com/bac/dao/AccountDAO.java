@@ -94,6 +94,17 @@ public class AccountDAO {
         }
     }
 
+    // Saves any transactions not yet in the database, then the new balance.
+// Call it after a deposit, withdrawal or interest payment.
+    public void saveChanges(Account account) throws SQLException {
+        int alreadySaved = transactionDAO.countByAccount(account.getAccountNumber());
+        List<Transaction> history = account.getTransactions();
+        for (int i = alreadySaved; i < history.size(); i++) {
+            transactionDAO.insert(account.getAccountNumber(), history.get(i));
+        }
+        updateBalance(account);
+    }
+
     // DELETE: history first (foreign key), then the account itself
     public void delete(String accountNumber) throws SQLException {
         transactionDAO.deleteByAccount(accountNumber);

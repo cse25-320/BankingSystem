@@ -27,6 +27,13 @@ public class Bank {
         return customer;
     }
 
+    // Used at start-up to put customers loaded from the database into the bank
+    public void addExistingCustomer(Customer customer) {
+        if (!customers.contains(customer)) {
+            customers.add(customer);
+        }
+    }
+
     public Optional<Customer> findCustomer(String customerId) {
         for (Customer customer : customers) {
             if (customer.getCustomerId().equals(customerId)) {

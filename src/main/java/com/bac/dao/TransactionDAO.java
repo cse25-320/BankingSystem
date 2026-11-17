@@ -50,6 +50,19 @@ public class TransactionDAO {
         return transactions;
     }
 
+    // How many transactions are already saved for this account
+    public int countByAccount(String accountNumber) throws SQLException {
+        String sql = "SELECT COUNT(*) FROM transactions WHERE account_number = ?";
+        try (Connection connection = DatabaseManager.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, accountNumber);
+            try (ResultSet rows = statement.executeQuery()) {
+                rows.next();
+                return rows.getInt(1);
+            }
+        }
+    }
+
     // DELETE: remove all of an account's history
     public void deleteByAccount(String accountNumber) throws SQLException {
         String sql = "DELETE FROM transactions WHERE account_number = ?";
